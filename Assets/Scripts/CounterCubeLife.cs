@@ -6,6 +6,7 @@ using UnityEngine;
 public class CounterCubeLife : MonoBehaviour
 {
     [SerializeField] private List<Grass> _grasses;
+    [SerializeField] private Painter _painter;
 
     public event Action<Cube> Destroyed;
 
@@ -29,7 +30,7 @@ public class CounterCubeLife : MonoBehaviour
     {
         if (cube.isChangeColor == false)
         {
-            cube.ChangeColor();
+            _painter.ChangeColor(cube);
             StartCoroutine(Countdown(cube));
         }
     }

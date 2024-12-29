@@ -4,7 +4,7 @@ public class Cube : MonoBehaviour
 {
     [SerializeField] private Material _standartColor;
 
-    private Renderer _color;
+    private Renderer _renderer;
     private float _lifeTime;
     private float _minLifeTime = 2f;
     private float _maxLifeTime = 5f;
@@ -12,7 +12,7 @@ public class Cube : MonoBehaviour
 
     private void Awake()
     {
-        _color = GetComponent<Renderer>();
+        _renderer = GetComponent<Renderer>();
     }
 
     public bool isChangeColor => _isChangeColor;
@@ -23,17 +23,16 @@ public class Cube : MonoBehaviour
         _lifeTime = Random.Range(_minLifeTime, _maxLifeTime + 1);        
     }
 
-    public void ChangeColor()
+    public void SetColor(Color color)
     {
-        Color color = Random.ColorHSV();
-
-        _color.material.color = color;
-        _isChangeColor = true;
+        if (_renderer != null)
+        {
+            _renderer.material.color = color;
+        }
     }
 
-    public void ResetChanges()
+    public void CanChangeColor(bool canChange)
     {
-        _color.material.color = _standartColor.color;
-        _isChangeColor = false;
+        _isChangeColor = canChange;
     }
 }

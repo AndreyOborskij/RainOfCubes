@@ -12,7 +12,7 @@ public class CubeSpawner : MonoBehaviour
     private void Awake()
     {
         _cubesPool = new ObjectPool<Cube>(
-            createFunc: () => CraeteCube(),
+            createFunc: () => CreateCube(),
             actionOnGet: (cube) => ActionOnGet(cube),
             actionOnRelease: (cube) => ActionOnRelease(cube),
             collectionCheck: true
@@ -39,10 +39,11 @@ public class CubeSpawner : MonoBehaviour
         _cubesPool.Release(cube);
     }
 
-    private Cube CraeteCube()
+    private Cube CreateCube()
     {
         var cube = Instantiate(_cubePrefab);
         cube.Init();
+
         return cube;
     }
 
@@ -51,7 +52,6 @@ public class CubeSpawner : MonoBehaviour
         cube.transform.position = _cloud.DefinePosition();
 
         cube.gameObject.SetActive(true);
-        cube.ResetChanges();
     }
 
     private void ActionOnRelease(Cube cube)

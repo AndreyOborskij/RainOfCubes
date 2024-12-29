@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Cloud : MonoBehaviour
 {
-    [SerializeField] private CubeSpawner _cubeManager;
-    [SerializeField] private List<PointSpawn> _pointsSpawn;
+    [SerializeField] private CubeSpawner _cubeSpawner;
+    [SerializeField] private List<SpawnPoint> _spawnPoints;
 
     private float _repeatRate = 0.5f;
     private float _startTime = 0.0f;
@@ -16,13 +16,13 @@ public class Cloud : MonoBehaviour
 
     public Vector3 DefinePosition()
     {
-        int randomPoint = Random.Range(0, _pointsSpawn.Count);
+        int randomPoint = Random.Range(0, _spawnPoints.Count);
 
-        return _pointsSpawn[randomPoint].transform.position;
+        return _spawnPoints[randomPoint].transform.position;
     }
 
     private void SpawnCubes()
     {
-        _cubeManager.GetCube();
+        _cubeSpawner.GetCube();
     }
 }
